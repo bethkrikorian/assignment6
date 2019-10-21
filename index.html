@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Assignment 6 </title>
+	<script
+  		src="https://code.jquery.com/jquery-3.4.1.js"
+  		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  		crossorigin="anonymous">
+	</script>
+
+	<script>
+		function Works_of_Art(name, price, small_image, large_image)
+		{
+			this.name = name; 
+			this.price = price; 
+			this.small_image = small_image;
+			this.large_image = large_image;
+		}
+
+		let array = [];
+		array[0] = new Works_of_Art("sunset", 400, 'sunset.jpg', 'sunset.jpg');
+		array[1] = new Works_of_Art("ocean", 650, 'ocean.jpg', 'ocean.jpg');
+		array[2] = new Works_of_Art("grass", 350, 'grass.jpg', 'grass.jpg');
+		array[3] = new Works_of_Art("tree", 700, 'tree.jpg', 'tree.jpg');
+		array[4] = new Works_of_Art("flower", 500, 'flower.jpg', 'flower.jpg');
+
+		$(document).ready(function(){
+			$('#divContainer img').on( {
+				mouseover: function() {
+					var pic_URL = $(this).attr('src');
+					$('#mainPicture').attr('src', pic_URL).hide().fadeIn(); 
+				}
+			});
+		});
+
+		$(document).ready(function() {
+			$('#divContainer img').click(function(){
+				var pic_ID = $(this).attr("id");
+				var pic_name = array[pic_ID].name;
+				var pic_price = array[pic_ID].price;
+
+			$("div.text").html("Name: " + pic_name + "</br>" + " " 
+				+ "Price: $" + pic_price); 
+			setTimeout(function() {
+				$("div.text").fadeOut().empty()}, 5000);
+
+			setTimeout(function(){
+	    	window.location.reload(); },5000);
+
+			});
+		});
+
+	</script>
+
+	<style type="text/css">
+	.imgStyle {
+		height: 100px; 
+		width: 100px;
+		border: 10px solid #FFF; 
+	}
+
+	.container {
+ 		position: relative;
+	}
+
+	.text {
+		position: absolute;
+		font-size: 50px;
+		text-align: center;
+		transform: translate(-50%, -50%);
+		top: 40%;
+		bottom: 60%;
+		left: 25%;
+		right: 25%;
+		color: #FFF;
+		font-family: serif;
+		font-weight: bold;
+	}
+	</style>
+</head>
+<body>
+	<div class = "container">
+		<img id = "mainPicture" height="450" width="600" 
+			style="border: 5px solid #FFF"
+			src = 'images/sunset.jpg' />
+		<div class = "text"></div>
+	</div>
+
+	</br>
+
+	<div id = "divContainer">
+		<img src = 'images/sunset.jpg' class = "imgStyle" id = '0' />
+		<img src = 'images/ocean.jpg' class = "imgStyle" id = '1' />
+		<img src = 'images/grass.jpg' class = "imgStyle" id = '2' />
+		<img src = 'images/tree.jpg' class = "imgStyle" id = '3' />
+		<img src = 'images/flower.jpg' class = "imgStyle" id = '4' />
+	</div>
+</body>
+</html>
